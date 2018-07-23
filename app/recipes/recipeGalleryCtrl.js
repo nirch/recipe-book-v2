@@ -7,4 +7,6 @@ app.controller('recipeGalleryCtrl', function($scope, user, $location) {
     }
 
     $scope.test = "dkdkd";
+
+    $scope.arr = [1,2,2,3,3,3,2,2,2,2,2,2,2,2,2,2,2];
 })
