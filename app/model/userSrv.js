@@ -37,10 +37,15 @@ app.factory('user', function($http, $q) {
         return async.promise;
     }
 
+    function getActiveUser() {
+        return activeUser;
+    }
+
     return {
         login: login,
         isLoggedIn: isLoggedIn,
-        logout: logout
+        logout: logout,
+        getActiveUser: getActiveUser
     }
 
 
