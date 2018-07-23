@@ -14,6 +14,10 @@ app.factory('user', function($http, $q) {
         return activeUser ? true : false;
     }
 
+    function logout() {
+        activeUser = null;
+    }
+
     function login(email, password) {
         var async = $q.defer();
 
@@ -29,7 +33,8 @@ app.factory('user', function($http, $q) {
 
     return {
         login: login,
-        isLoggedIn: isLoggedIn
+        isLoggedIn: isLoggedIn,
+        logout: logout
     }
 
 
