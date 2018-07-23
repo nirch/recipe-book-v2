@@ -10,6 +10,10 @@ app.factory('user', function($http, $q) {
     } 
 
 
+    function isLoggedIn() {
+        return activeUser ? true : false;
+    }
+
     function login(email, password) {
         var async = $q.defer();
 
@@ -24,7 +28,8 @@ app.factory('user', function($http, $q) {
     }
 
     return {
-        login: login
+        login: login,
+        isLoggedIn: isLoggedIn
     }
 
 
