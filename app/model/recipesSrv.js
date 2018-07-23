@@ -12,10 +12,12 @@ app.factory("recipes", function($http, $q, user) {
         this.userId = plainRecipe.userId;
     }
 
+
+
     function getActiveUserRecipes() {
         var async = $q.defer();
         
-        var recipesUrl = "http://my-json-server.typicode.com/nirch/recipe-book-v2/recipes?userId=" + user.getActiveUser().id;
+        var recipesUrl = "https://json-server-heroku-jourxcdhlf.now.sh/recipes?userId=" + user.getActiveUser().id;
         $http.get(recipesUrl).then(function(response) {
             var recipes = [];
             response.data.forEach(function(recipe) {
@@ -29,8 +31,24 @@ app.factory("recipes", function($http, $q, user) {
         return async.promise;
     }
 
+    function createRecipe(recipe) {
+        var async = $q.defer();
+        
+        var recipesUrl = "https://json-server-heroku-jourxcdhlf.now.sh/recipes"
+        $http.post(recipesUrl, recipe).then(function(response) {
+            var recipe = new Recipe(response.data);
+            async.resolve(recipe);
+        }, function(err) {
+            async.reject(err);
+        });
+
+        return async.promise;
+
+    }
+
     return {
-        getActiveUserRecipes: getActiveUserRecipes
+        getActiveUserRecipes: getActiveUserRecipes,
+        createRecipe: createRecipe
     }
 
 
