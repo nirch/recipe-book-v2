@@ -7,6 +7,7 @@ app.factory('user', function($http, $q) {
         this.fname = plainUser.fname;
         this.lname = plainUser.lname;
         this.email = plainUser.email;
+        this.id = plainUser.id;
     } 
 
 
