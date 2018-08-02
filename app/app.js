@@ -1,5 +1,5 @@
 
-var app = angular.module("RecipeApp", ["ngRoute"]);
+var app = angular.module("RecipeApp", ["ngRoute", "imageupload"]);
 
 app.config(function($routeProvider) {
     $routeProvider
