@@ -9,6 +9,7 @@ app.controller('recipeGalleryCtrl', function($scope, user, $location, recipes) {
 
     recipes.getActiveUserRecipes().then(function(recipes) {
         $scope.recipes = recipes;
+        $scope.$apply();    // Using apply only becuase getActiveUserRecipes uses async keyword
     }, function(err) {
         console.log(err);
     });

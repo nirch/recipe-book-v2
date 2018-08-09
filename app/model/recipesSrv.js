@@ -13,22 +13,35 @@ app.factory("recipes", function($http, $q, user) {
     }
 
 
+    // function getActiveUserRecipes() {
+    //     var async = $q.defer();
+        
+    //     var recipesUrl = "https://json-server-heroku-jourxcdhlf.now.sh/recipes?userId=" + user.getActiveUser().id;
+    //     $http.get(recipesUrl).then(function(response) {
+    //         var recipes = [];
+    //         response.data.forEach(function(recipe) {
+    //             recipes.push(new Recipe(recipe));
+    //         })
+    //         async.resolve(recipes);
+    //     }, function(err) {
+    //         async.reject(err);
+    //     });
 
-    function getActiveUserRecipes() {
-        var async = $q.defer();
+    //     return async.promise;
+    // }
+
+
+    // NOTE: this function uses advnaced ES7 functionallity: async and await. See above function version without this functionality
+    async function getActiveUserRecipes() {
         
         var recipesUrl = "https://json-server-heroku-jourxcdhlf.now.sh/recipes?userId=" + user.getActiveUser().id;
-        $http.get(recipesUrl).then(function(response) {
-            var recipes = [];
-            response.data.forEach(function(recipe) {
-                recipes.push(new Recipe(recipe));
-            })
-            async.resolve(recipes);
-        }, function(err) {
-            async.reject(err);
-        });
+        var response = await $http.get(recipesUrl);
+        var recipes = [];
+        response.data.forEach(function(recipe) {
+            recipes.push(new Recipe(recipe));
+        })
 
-        return async.promise;
+        return recipes;
     }
 
     function createRecipe(recipe) {
